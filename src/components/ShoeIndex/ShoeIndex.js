@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS, BREAKPOINTS } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -13,16 +13,23 @@ const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
+        <MobileOnlyBreadCrumbs>
+          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale/shoes">
+            Shoes
+          </Breadcrumbs.Crumb>
+        </MobileOnlyBreadCrumbs>
         <Header>
           <Title>Running</Title>
-          <Select
+          <StyledSelect
             label="Sort"
             value={sortId}
             onChange={(ev) => setSortId(ev.target.value)}
           >
             <option value="newest">Newest Releases</option>
             <option value="price">Price</option>
-          </Select>
+          </StyledSelect>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -51,6 +58,9 @@ const Wrapper = styled.div`
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  @media screen and (max-width: ${BREAKPOINTS.tablet}) {
+    display: none;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -63,9 +73,22 @@ const Header = styled.header`
   align-items: baseline;
 `;
 
+const StyledSelect = styled(Select)`
+  @media screen and (max-width: ${BREAKPOINTS.tablet}) {
+    display: none;
+  }
+`
+
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
 `;
+
+const MobileOnlyBreadCrumbs = styled(Breadcrumbs)`
+  display: none;
+  @media screen and (max-width: ${BREAKPOINTS.tablet}) {
+    display: flex;
+  }
+`
 
 export default ShoeIndex;

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { COLORS, WEIGHTS, BREAKPOINTS } from '../../constants';
 import Logo from '../Logo';
+import Icon from '../Icon';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 
@@ -15,13 +16,16 @@ const Header = () => {
   // <button onClick={() => setShowMobileMenu(true)}>
 
   return (
-    <header>
+    <Container>
       <SuperHeader />
       <MainHeader>
         <Side>
           <Logo />
         </Side>
         <Nav>
+          <NavIcon id='shopping-bag' color='black' size={25} />
+          <NavIcon id='search' color='black' size={25} />
+          <NavIcon id='menu' color='black' size={25} />
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
@@ -36,7 +40,7 @@ const Header = () => {
         isOpen={showMobileMenu}
         onDismiss={() => setShowMobileMenu(false)}
       />
-    </header>
+    </Container>
   );
 };
 
@@ -52,6 +56,9 @@ const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+  @media screen and (max-width: ${BREAKPOINTS.tablet}) {
+    margin-right: 0px;
+  }  
 `;
 
 const Side = styled.div`
@@ -69,5 +76,40 @@ const NavLink = styled.a`
     color: ${COLORS.secondary};
   }
 `;
+
+const NavIcon = styled(Icon)`
+  display: none;
+`
+
+const Container = styled.header`
+  @media screen and (max-width: ${BREAKPOINTS.laptop}) {
+    > div:first-child {
+      display: none;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 5px;
+      background-color: ${COLORS.gray[900]};
+    }
+  }
+
+  @media screen and (max-width: ${BREAKPOINTS.tablet}) {
+    ${NavLink} {
+      display: none;
+    }
+    ${NavIcon} {
+      display: inline-block;
+    }
+    ${Side}:last-child {
+      display: none;
+    }
+    ${Nav} {
+      gap: 24px;
+    }
+  }  
+`
 
 export default Header;
