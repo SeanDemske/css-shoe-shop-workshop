@@ -71,7 +71,9 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  background-color: 'red';
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -122,7 +124,8 @@ const Flag = styled.div`
 `;
 
 const SaleFlag = styled(Flag)`
-  background-color: ${COLORS.primary};
+  background-color: var(--color-red);
+  /* background-color: ${COLORS.primary}; */
 `;
 const NewFlag = styled(Flag)`
   background-color: ${COLORS.secondary};

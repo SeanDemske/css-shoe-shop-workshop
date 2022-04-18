@@ -12,7 +12,7 @@ const Header = () => {
 
   // For our mobile hamburger menu, we'll want to use a button
   // with an onClick handler, something like this:
-  //
+  
   // <button onClick={() => setShowMobileMenu(true)}>
 
   return (
@@ -25,7 +25,7 @@ const Header = () => {
         <Nav>
           <NavIcon id='shopping-bag' color='black' size={25} />
           <NavIcon id='search' color='black' size={25} />
-          <NavIcon id='menu' color='black' size={25} />
+          <Button onClick={() => setShowMobileMenu(true)}><NavIcon id='menu' color='black' size={25} /></Button>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
@@ -48,18 +48,29 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
+  height: min-content;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem,5vw + .5rem, 10rem);
   margin: 0px 48px;
   @media screen and (max-width: ${BREAKPOINTS.tablet}) {
     margin-right: 0px;
   }  
 `;
+
+const Button = styled.button`
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: min-content;
+  width: min-content;
+  color: transparent;
+  background-color: transparent;
+`
 
 const Side = styled.div`
   flex: 1;

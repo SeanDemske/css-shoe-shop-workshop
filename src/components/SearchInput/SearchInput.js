@@ -26,7 +26,7 @@ const Input = styled.input`
   border-bottom: 1px solid ${COLORS.gray[300]};
   padding-left: 24px;
   font-size: 0.875rem;
-  color: ${COLORS.gray[100]};
+  color: var(--color-gray-100);
   outline-offset: 4px;
 
   &::placeholder {
